@@ -1,0 +1,113 @@
+body { 
+    padding-top:5px; 
+}
+
+a.find:visited {
+    color: green;
+}
+
+.navbar-toggle .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: #ffffff;
+  border-radius: 1px;
+}
+
+.active { 
+    /*background: #2b9949; */
+}
+
+fieldset{
+    
+	padding:15px;
+	margin:0;
+	border:none;
+	display:inline-block;
+	*display:inline;/* ie6/7 hack for inline block */
+	zoom:1.0;/* ie6/7 hack for inline block */
+	vertical-align:top;
+	width:50%;
+}
+
+.labelname {
+    margin-top: 2px;
+    font-weight:bold;
+    float:center
+}
+
+#span {
+    float:right;
+
+}
+
+/*HOVER POPUP LINKS*/
+
+/*hoverpopups type 1*/
+
+#popup {  }
+
+#popup a, #popup a:visited {
+    position: relative;
+	display: block;
+}
+
+#popup a span {
+	display: none;
+}
+
+/* the IE correction rule */
+#popup a:hover	{
+	text-indent: 0; /* added the default value */
+}
+
+#popup a:hover span {
+    visibility: visible;
+	display: block;
+	position: absolute;
+	top: 30px;
+	left: 0px;
+	margin: 0px;
+	padding: 1x;
+	background: #e5e5e5;
+	text-align: center;
+	border: 1px solid #666;
+    z-index: 100;
+}
+
+
+@media (min-width: 768px) and (max-width: 800px) {
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+    .navbar-collapse.collapse.in {
+        display: block !important;
+    }
+    .navbar-header .collapse, .navbar-toggle {
+        display:block !important;
+    }
+    .navbar-header {
+        float:none;
+    }
+}
+
+tr {
+    opacity: 1;
+}
+tr.ng-enter {
+    -webkit-transition: .25s;
+    transition: .25s;
+    opacity: 0;
+}
+tr.ng-enter-active {
+    opacity: 1;
+}
+
+tr.ng-leave {
+    -webkit-transition: .25s;
+    transition: .25s;
+    opacity: 1;
+}
+tr.ng-leave-active {
+    opacity: 0;
+}
