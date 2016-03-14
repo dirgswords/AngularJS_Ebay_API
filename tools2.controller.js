@@ -53,7 +53,7 @@ angular
             Authentication.logout();
         };
         
-        $scope.search = "rare nes";
+        $scope.search = "Search Phrase Here";
         $scope.num = 10;
         
         vm.fetch = function fetch(){
