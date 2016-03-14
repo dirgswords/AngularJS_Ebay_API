@@ -1,0 +1,105 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <img src="app-content/images/pod_icon.png" border="0">
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
+        <ul class="nav navbar-nav">
+            <li><a href="#home"><i class="fa fa-cog fa-fw"></i>&nbsp;{{ vm.name }}</a></li>
+            <li><a ng-click="vm.logout()" href="javascript:void(0);"><i class="fa fa-exclamation fa-fw"></i>&nbsp;Log Out</a></li>
+            <li><a href="#post"><i class="fa fa-pencil fa-fw"></i>&nbsp;Post</a></li>
+            <li><a href="#listings"><i class="fa fa-book fa-fw"></i>&nbsp;Listings</a></li>
+            <li class="active"><a href="#tools"><i class="fa fa-sun-o fa-fw"></i>&nbsp;Tools</a></li>
+        </ul>
+        <div class="col-sm-3 col-md-3 pull-right">
+            <form class="navbar-form" role="search">
+                <input ng-model="searches.$" class="form-control" placeholder="Search By Anything" name="srch-term" id="srch-term">
+            </form>
+        </div>
+    </div>
+</nav><br><br><br><br>
+  <ul class="nav nav-tabs">
+    <li><a href="#tools">Lazy Craigslist RSS</a></li>
+    <li class="active"><a href="#tools2">Lazy Ebay Search</a></li>
+  </ul>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <center>
+        <h3>Lazy Ebay Search</h3>
+            (I want {{num}} search results)<br>
+            <input type="range" ng-model="num" min="10" max="100"><br>
+            (refreshed every 60 seconds)<br>
+        </center>
+        </td><td valign="top">
+    </div>
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <div class="input-group search-bar">
+          <input type="text" 
+                 ng-model="search" 
+                 ng-model-options="{ debounce: 800 }"
+                 placeholder="Enter ebay search term" />... <label class="control-label" for="inputWarning">{{vm.wait}}</label>
+        </div>
+        <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                 <a href="#/tools2" ng-click="vm.sortType = 'xObj.galleryURL[0]'; vm.sortReverse = !vm.sortReverse">
+                    Image
+                    <span ng-show="vm.sortType == 'xObj.galleryURL[0]' && !vm.sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="vm.sortType == 'xObj.galleryURL[0]' && vm.sortReverse" class="fa fa-caret-up"></span>
+                 </a>
+              </th>
+              <th>
+                <a href="#/tools2" ng-click="vm.sortType = 'title[0]'; vm.sortReverse = !vm.sortReverse">
+                    Title
+                    <span ng-show="vm.sortType == 'title[0]' && !vm.sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="vm.sortType == 'title[0]' && vm.sortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+              <th>
+                <a href="#/tools2" ng-click="vm.sortType = 'sellingStatus[0].currentPrice[0].__value__'; vm.sortReverse = !vm.sortReverse">
+                    Prices
+                    <span ng-show="vm.sortType == 'sellingStatus[0].currentPrice[0].__value__' && !vm.sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="vm.sortType == 'sellingStatus[0].currentPrice[0].__value__' && vm.sortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+              <th>
+                <a href="#/tools2" ng-click="vm.sortType = 'listingInfo[0].listingType[0]'; vm.sortReverse = !vm.sortReverse">
+                    Type
+                    <span ng-show="vm.sortType == 'listingInfo[0].listingType[0]' && !vm.sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="vm.sortType == 'listingInfo[0].listingType[0]' && vm.sortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+              <th>
+                <a href="#/tools2" ng-click="vm.sortType = 'listingInfo[0].endTime[0]'; vm.sortReverse = !vm.sortReverse">
+                    Time
+                    <span ng-show="vm.sortType == 'listingInfo[0].endTime[0]' && !vm.sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="vm.sortType == 'listingInfo[0].endTime[0]' && vm.sortReverse" class="fa fa-caret-up"></span>
+                </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody id="popup">
+          <tr ng-repeat="xObj in vm.mylistings | filter:searches:strict | orderBy:vm.sortType:vm.sortReverse">
+            <td><center>
+                <a ng-href=""><button type="button" class="btn btn-success btn-sm"></button><span><img src="{{xObj.galleryURL[0]}}" width="300" alt=""></span></a>
+            </center>
+            </td>
+            <td><a href="{{xObj.viewItemURL[0]}}" target="_blank" class="find" >{{xObj.title[0]}}</a></td>
+            <td><a href="{{xObj.viewItemURL[0]}}" target="_blank" class="find" >{{xObj.sellingStatus[0].currentPrice[0].__value__ | currency:"$":0}}{{xObj.shippingInfo[0].shippingType[0] | freeShipping}}{{xObj.listingInfo[0].bestOfferEnabled[0] | bestOffer}}</a></td>
+            <td><a href="{{xObj.viewItemURL[0]}}" target="_blank" class="find" >{{xObj.listingInfo[0].listingType[0]}}</a></td>
+            <td><a href="{{xObj.viewItemURL[0]}}" target="_blank" class="find" >{{xObj.listingInfo[0].endTime[0] | timeLeft}}</a></td>
+          </tr>
+        </tbody>
+        </table>
+        </div>
+        
+    </div>
+
+
