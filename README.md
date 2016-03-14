@@ -1,2 +1,1 @@
-# AngularJS_Ebay_API
-AngularJS_Ebay_API
+This is a little project of mine to be able to use Angular Features to quickly and lazily search Ebay for items in need...
