@@ -42,10 +42,8 @@ angular
     };
     });
     
-    function Tools2 ($location, $scope, $interval, $http, Authentication) {
+    function Tools2 ($location, $scope, $interval, $http) {
         var vm = this;
-        vm.name = Authentication.getUser();
-        vm.location = Authentication.getLocation();
         vm.sortType     = 'title'; // set the default sort type
         vm.sortReverse  = false;  // set the default sort order
         vm.wait = "Loading, Please Wait...";
